@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "phantom-migrations"
+version = "0.1.0"
+description = "Инструмент миграций для YDB, аналог Alembic"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "ydb>=3.28.0",
+    "click>=8.1",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+phantom = "phantom.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/phantom"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
